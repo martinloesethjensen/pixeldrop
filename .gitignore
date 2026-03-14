@@ -1,0 +1,23 @@
+# Dart / Flutter
+.dart_tool/
+build/
+*.g.dart
+*.freezed.dart
+.flutter-plugins
+.flutter-plugins-dependencies
+pubspec.lock
+
+# Backend env
+packages/backend/.env
+
+# Firebase
+.firebase/
+
+# IDE
+.DS_Store
+.idea/
+.vscode/
+*.iml
+
+# Build outputs
+/server
