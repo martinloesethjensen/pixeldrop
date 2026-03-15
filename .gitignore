@@ -7,8 +7,10 @@ build/
 .flutter-plugins-dependencies
 pubspec.lock
 
-# Backend env
-packages/backend/.env
+# Environment files
+.env
+.env.*
+*.env
 
 # Firebase
 .firebase/

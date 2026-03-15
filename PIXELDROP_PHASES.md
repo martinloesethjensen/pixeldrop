@@ -29,9 +29,9 @@
 > Goal: Empty repo exists, plan file is in place, git is initialised. Nothing is built yet.
 
 ### 0.1 Create the repository
-- [ ] Create root directory `pixeldrop/`
-- [ ] Initialise git: `git init`
-- [ ] Create `.gitignore` at the root with the following entries:
+- [x] Create root directory `pixeldrop/`
+- [x] Initialise git: `git init`
+- [x] Create `.gitignore` at the root with the following entries:
   ```
   # Dart / Flutter
   .dart_tool/
@@ -59,18 +59,18 @@
   ```
 
 ### 0.2 Add the plan file
-- [ ] Copy `PIXELDROP_PHASES.md` into the root of `pixeldrop/`
-- [ ] Make an initial commit:
+- [x] Copy `PIXELDROP_PHASES.md` into the root of `pixeldrop/`
+- [x] Make an initial commit:
   ```bash
   git add .
   git commit -m "chore: initialise repo and add build plan"
   ```
 
 ### ✅ Phase 0 verification
-- [ ] `git log --oneline` shows exactly one commit
-- [ ] `PIXELDROP_PHASES.md` exists at repo root
-- [ ] `.gitignore` exists at repo root
-- [ ] `git status` is clean
+- [x] `git log --oneline` shows exactly one commit
+- [x] `PIXELDROP_PHASES.md` exists at repo root
+- [x] `.gitignore` exists at repo root
+- [x] `git status` is clean
 
 ---
 
@@ -79,24 +79,24 @@
 > Goal: Pub workspace boots cleanly. All shared models compile and round-trip through JSON.
 
 ### 1.1 Workspace scaffold
-- [ ] Create root directory `pixeldrop/`
-- [ ] Create root `pubspec.yaml` with pub workspace pointing to `packages/shared`, `packages/frontend`, `packages/backend`
+- [x] Create root directory `pixeldrop/`
+- [x] Create root `pubspec.yaml` with pub workspace pointing to `packages/shared`, `packages/frontend`, `packages/backend`
   ```yaml
   name: pixeldrop
   environment:
-    sdk: '>=3.5.0 <4.0.0'
+    sdk: '>=3.11.0 <4.0.0'
   workspace:
     - packages/shared
     - packages/frontend
     - packages/backend
   ```
-- [ ] Create `packages/shared/` as a plain Dart package:
+- [x] Create `packages/shared/` as a plain Dart package:
   ```bash
   dart create -t package packages/shared
   ```
-  Then set `name: shared` in its `pubspec.yaml` and ensure sdk `>=3.5.0 <4.0.0`. Remove the example lib/src files.
+  Then set `name: shared` in its `pubspec.yaml` and ensure sdk `>=3.11.0 <4.0.0`. Remove the example lib/src files.
 
-- [ ] Create `packages/frontend/` using Flutter with the correct org and project name:
+- [x] Create `packages/frontend/` using Flutter with the correct org and project name:
   ```bash
   flutter create \
     --org dev.martinloeseth \
@@ -106,72 +106,72 @@
   This sets the bundle identifier to `dev.martinloeseth.pixeldrop` on iOS/Android/macOS and the package name on Android. The directory will be `packages/frontend/` but the app's internal name is `pixeldrop`.
   After creation, open `packages/frontend/pubspec.yaml` and add the pub workspace `resolution: workspace` field.
 
-- [ ] Enable all target platforms for the Flutter app:
+- [x] Enable all target platforms for the Flutter app:
   ```bash
   cd packages/frontend
   flutter create --platforms=web,android,ios,macos,windows,linux .
   ```
 
-- [ ] Create `packages/backend/` as a Dart Frog project:
+- [x] Create `packages/backend/` as a Dart Frog project:
   ```bash
   dart pub global activate dart_frog_cli
   dart_frog create packages/backend
   ```
   Then set `name: backend` in its `pubspec.yaml`.
 
-- [ ] Add `resolution: workspace` to both `packages/shared/pubspec.yaml` and `packages/backend/pubspec.yaml` so they participate in the pub workspace.
+- [x] Add `resolution: workspace` to both `packages/shared/pubspec.yaml` and `packages/backend/pubspec.yaml` so they participate in the pub workspace.
 
-- [ ] Run `dart pub get` at root — confirm all three packages resolve without errors
+- [x] Run `dart pub get` at root — confirm all three packages resolve without errors
 
 ### 1.2 Shared constants
-- [ ] Create `packages/shared/lib/constants.dart` with:
-  - [ ] `const int canvasWidth = 1000`
-  - [ ] `const int canvasHeight = 1000`
-  - [ ] `const int chunkSize = 250` — divides evenly into 1000, giving exactly 4×4 = 16 chunks, no partial edges
-  - [ ] `const int chunksX = 4` (1000 ÷ 250)
-  - [ ] `const int chunksY = 4` (1000 ÷ 250)
-  - [ ] `const int totalChunks = 16`
-  - [ ] `const Duration pixelCooldown = Duration(seconds: 5)`
-  - [ ] `const List<int> presetColours` — 16 ARGB ints matching r/place 2022 palette: dark red, red, orange, yellow, dark green, green, dark teal, teal, dark blue, blue, dark purple, purple, white, light grey, dark grey, black
+- [x] Create `packages/shared/lib/constants.dart` with:
+  - [x] `const int canvasWidth = 1000`
+  - [x] `const int canvasHeight = 1000`
+  - [x] `const int chunkSize = 250` — divides evenly into 1000, giving exactly 4×4 = 16 chunks, no partial edges
+  - [x] `const int chunksX = 4` (1000 ÷ 250)
+  - [x] `const int chunksY = 4` (1000 ÷ 250)
+  - [x] `const int totalChunks = 16`
+  - [x] `const Duration pixelCooldown = Duration(seconds: 5)`
+  - [x] `const List<int> presetColours` — 16 ARGB ints matching r/place 2022 palette: dark red, red, orange, yellow, dark green, green, dark teal, teal, dark blue, blue, dark purple, purple, white, light grey, dark grey, black
 
 ### 1.3 Pixel model
-- [ ] Create `packages/shared/lib/models/pixel.dart`
-  - [ ] Immutable class `Pixel { final int x, y, color; }` (color = ARGB int)
-  - [ ] `toJson()` → `Map<String, dynamic>`
-  - [ ] `fromJson(Map<String, dynamic>)` factory
-  - [ ] `copyWith()`
+- [x] Create `packages/shared/lib/models/pixel.dart`
+  - [x] Immutable class `Pixel { final int x, y, color; }` (color = ARGB int)
+  - [x] `toJson()` → `Map<String, dynamic>`
+  - [x] `fromJson(Map<String, dynamic>)` factory
+  - [x] `copyWith()`
 
 ### 1.4 Chunk model
-- [ ] Create `packages/shared/lib/models/chunk.dart`
-  - [ ] `ChunkKey` value object `{ int cx, int cy }`
-    - [ ] `factory ChunkKey.fromPixel(int x, int y)` — divides pixel coords by `chunkSize`
-    - [ ] `int get index => cy * chunksX + cx` — values 0–15 for a 4×4 grid
-    - [ ] `==` and `hashCode` based on `cx, cy`
-  - [ ] `Chunk` class `{ ChunkKey key, Uint32List pixels }`
-    - [ ] `pixels.length == chunkSize * chunkSize`
-    - [ ] `int getPixel(int localX, int localY)`
-    - [ ] `void setPixel(int localX, int localY, int argbColor)`
-    - [ ] `static Chunk white(ChunkKey key)` — initialises all pixels to `0xFFFFFFFF`
-    - [ ] `Uint8List toBytes()` — converts ARGB Uint32List to raw byte array
-    - [ ] `static Chunk fromBytes(ChunkKey key, Uint8List bytes)` — inverse of toBytes
+- [x] Create `packages/shared/lib/models/chunk.dart`
+  - [x] `ChunkKey` value object `{ int cx, int cy }`
+    - [x] `factory ChunkKey.fromPixel(int x, int y)` — divides pixel coords by `chunkSize`
+    - [x] `int get index => cy * chunksX + cx` — values 0–15 for a 4×4 grid
+    - [x] `==` and `hashCode` based on `cx, cy`
+  - [x] `Chunk` class `{ ChunkKey key, Uint32List pixels }`
+    - [x] `pixels.length == chunkSize * chunkSize`
+    - [x] `int getPixel(int localX, int localY)`
+    - [x] `void setPixel(int localX, int localY, int argbColor)`
+    - [x] `static Chunk white(ChunkKey key)` — initialises all pixels to `0xFFFFFFFF`
+    - [x] `Uint8List toBytes()` — converts ARGB Uint32List to raw byte array
+    - [x] `static Chunk fromBytes(ChunkKey key, Uint8List bytes)` — inverse of toBytes
 
 ### 1.5 WebSocket message protocol
-- [ ] Create `packages/shared/lib/models/ws_message.dart`
-  - [ ] Sealed class `WsMessage` with subtypes:
-    - [ ] `PixelUpdate { Pixel pixel, String userId }`
-    - [ ] `RateLimitError { int retryAfterMs }`
-    - [ ] `UserCount { int count }`
-    - [ ] `BatchUpdate { List<PixelUpdate> updates }` (for server-side batching in Phase 6)
-  - [ ] JSON encode with `type` discriminator field for each subtype
-  - [ ] `WsMessage.fromJson(Map<String, dynamic>)` factory that switches on `type`
+- [x] Create `packages/shared/lib/models/ws_message.dart`
+  - [x] Sealed class `WsMessage` with subtypes:
+    - [x] `PixelUpdate { Pixel pixel, String userId }`
+    - [x] `RateLimitError { int retryAfterMs }`
+    - [x] `UserCount { int count }`
+    - [x] `BatchUpdate { List<PixelUpdate> updates }` (for server-side batching in Phase 6)
+  - [x] JSON encode with `type` discriminator field for each subtype
+  - [x] `WsMessage.fromJson(Map<String, dynamic>)` factory that switches on `type`
 
 ### 1.6 Barrel export
-- [ ] Create `packages/shared/lib/shared.dart` exporting constants, all models
+- [x] Create `packages/shared/lib/shared.dart` exporting constants, all models
 
 ### ✅ Phase 1 verification
-- [ ] `dart analyze packages/shared` — zero errors, zero warnings
-- [ ] Write and run a quick inline test: construct each WsMessage subtype, encode to JSON, decode back, assert equality
-- [ ] `dart pub get` at root still succeeds after all files are added
+- [x] `dart analyze packages/shared` — zero errors, zero warnings
+- [x] Write and run a quick inline test: construct each WsMessage subtype, encode to JSON, decode back, assert equality
+- [x] `dart pub get` at root still succeeds after all files are added
 
 ---
 
@@ -180,59 +180,60 @@
 > Goal: Canvas store, connection management, and rate limiting all work correctly in isolation.
 
 ### 2.1 Backend dependencies
-- [ ] Add to `packages/backend/pubspec.yaml`:
+- [x] Add to `packages/backend/pubspec.yaml`:
   ```yaml
   dependencies:
-    dart_frog: ^1.4.0
-    dart_frog_web_socket: ^1.1.0
-    uuid: ^4.4.0
+    dart_frog: ^1.2.6
+    dart_frog_web_socket: ^1.0.3
     shared:
       path: ../shared
+    uuid: ^4.4.0
+    web_socket_channel: ^3.0.0
   ```
-- [ ] Run `dart pub get` in `packages/backend`
+- [x] Run `dart pub get` in `packages/backend`
 
 ### 2.2 CanvasStore
-- [ ] Create `packages/backend/lib/canvas_store.dart`
-  - [ ] Hold full 1000×1000 canvas as `Uint32List` of size `canvasWidth * canvasHeight` (1,000,000 entries, ~4 MB)
-  - [ ] Index formula: `y * canvasWidth + x`
-  - [ ] Initialise all pixels to `0xFFFFFFFF` (white) in constructor
-  - [ ] `void setPixel(int x, int y, int color)` — clamp x/y to valid range, do not throw
-  - [ ] `int getPixel(int x, int y)`
-  - [ ] `Uint8List getChunkBytes(int cx, int cy)`
-    - [ ] Extract 250×250 region from the Uint32List
-    - [ ] Convert each pixel from ARGB int to 4 bytes in ARGB order
-    - [ ] All chunks are exactly 250×250 — no partial edge handling needed (1000 ÷ 250 = 4 exactly)
-    - [ ] Return `Uint8List` of exactly `chunkSize * chunkSize * 4` = 250,000 bytes
+- [x] Create `packages/backend/lib/canvas_store.dart`
+  - [x] Hold full 1000×1000 canvas as `Uint32List` of size `canvasWidth * canvasHeight` (1,000,000 entries, ~4 MB)
+  - [x] Index formula: `y * canvasWidth + x`
+  - [x] Initialise all pixels to `0xFFFFFFFF` (white) in constructor
+  - [x] `void setPixel(int x, int y, int color)` — clamp x/y to valid range, do not throw
+  - [x] `int getPixel(int x, int y)`
+  - [x] `Uint8List getChunkBytes(int cx, int cy)`
+    - [x] Extract 250×250 region from the Uint32List
+    - [x] Convert each pixel from ARGB int to 4 bytes in ARGB order
+    - [x] All chunks are exactly 250×250 — no partial edge handling needed (1000 ÷ 250 = 4 exactly)
+    - [x] Return `Uint8List` of exactly `chunkSize * chunkSize * 4` = 250,000 bytes
 
 ### 2.3 ConnectionManager
-- [ ] Create `packages/backend/lib/connection_manager.dart`
-  - [ ] `Map<String, WebSocketChannel> _connections` (private)
-  - [ ] `void add(String id, WebSocketChannel ch)`
-  - [ ] `void remove(String id)`
-  - [ ] `void broadcast(WsMessage msg)` — serialise to JSON string, sink to all channels
-  - [ ] `void sendTo(String id, WsMessage msg)` — send to a single connection by id
-  - [ ] `int get userCount => _connections.length`
+- [x] Create `packages/backend/lib/connection_manager.dart`
+  - [x] `Map<String, WebSocketChannel> _connections` (private)
+  - [x] `void add(String id, WebSocketChannel ch)`
+  - [x] `void remove(String id)`
+  - [x] `void broadcast(WsMessage msg)` — serialise to JSON string, sink to all channels
+  - [x] `void sendTo(String id, WsMessage msg)` — send to a single connection by id
+  - [x] `int get userCount => _connections.length`
 
 ### 2.4 RateLimiter
-- [ ] Create `packages/backend/lib/rate_limiter.dart`
-  - [ ] `Map<String, DateTime> _lastPlacement` (private)
-  - [ ] `bool isAllowed(String userId)` — true if userId unseen OR `DateTime.now() - _lastPlacement[userId] > pixelCooldown`
-  - [ ] `void record(String userId)` — store `DateTime.now()` for userId
-  - [ ] `int retryAfterMs(String userId)` — returns remaining cooldown in milliseconds
-  - [ ] `void cleanup()` — remove all entries where last placement > `2 * pixelCooldown` ago
+- [x] Create `packages/backend/lib/rate_limiter.dart`
+  - [x] `Map<String, DateTime> _lastPlacement` (private)
+  - [x] `bool isAllowed(String userId)` — true if userId unseen OR `DateTime.now() - _lastPlacement[userId] > pixelCooldown`
+  - [x] `void record(String userId)` — store `DateTime.now()` for userId
+  - [x] `int retryAfterMs(String userId)` — returns remaining cooldown in milliseconds
+  - [x] `void cleanup()` — remove all entries where last placement > `2 * pixelCooldown` ago
 
 ### 2.5 Middleware (dependency injection)
-- [ ] Create `packages/backend/routes/_middleware.dart`
-  - [ ] `context.provide<CanvasStore>(() => CanvasStore())` — single instance
-  - [ ] `context.provide<ConnectionManager>(() => ConnectionManager())` — single instance
-  - [ ] `context.provide<RateLimiter>(() => RateLimiter())` — single instance
-  - [ ] Start `Timer.periodic(Duration(minutes: 1), (_) => rateLimiter.cleanup())`
+- [x] Create `packages/backend/routes/_middleware.dart`
+  - [x] `context.provide<CanvasStore>(() => CanvasStore())` — single instance
+  - [x] `context.provide<ConnectionManager>(() => ConnectionManager())` — single instance
+  - [x] `context.provide<RateLimiter>(() => RateLimiter())` — single instance
+  - [x] Start `Timer.periodic(Duration(minutes: 1), (_) => rateLimiter.cleanup())`
 
 ### ✅ Phase 2 verification
-- [ ] `dart analyze packages/backend` — zero errors
-- [ ] Manually instantiate `CanvasStore`, call `setPixel(0, 0, 0xFF0000FF)`, assert `getPixel(0,0) == 0xFF0000FF`
-- [ ] Manually instantiate `CanvasStore`, call `getChunkBytes(0, 0)`, assert returned length is `256 * 256 * 4`
-- [ ] Manually instantiate `RateLimiter`, call `isAllowed('user1')` twice in quick succession — first true, second false
+- [x] `dart analyze packages/backend` — zero errors
+- [x] Manually instantiate `CanvasStore`, call `setPixel(0, 0, 0xFF0000FF)`, assert `getPixel(0,0) == 0xFF0000FF`
+- [x] Manually instantiate `CanvasStore`, call `getChunkBytes(0, 0)`, assert returned length is `250 * 250 * 4` = 250,000 bytes
+- [x] Manually instantiate `RateLimiter`, call `isAllowed('user1')` twice in quick succession — first true, second false
 
 ---
 
@@ -660,18 +661,27 @@
 > Goal: The app builds and deploys via Docker (backend) and Firebase Hosting (frontend). Makefile covers all common dev and ops commands. GitHub Actions runs CI on every push and deploys on PR and merge to main.
 
 ### 8.1 Environment configuration
-- [ ] Create `packages/backend/.env` (add to `.gitignore`):
+- [ ] Create `packages/backend/.env.example` (committed, no real values — documents required variables):
   ```
   HOST=0.0.0.0
   PORT=8080
   PIXEL_COOLDOWN_SECONDS=5
   MAX_CONNECTIONS=50000
   ```
-- [ ] Update `packages/backend` to read `PORT` from environment via `Platform.environment['PORT']` with fallback to `'8080'`
+- [ ] The actual `.env` is never committed — it is loaded into the shell environment before running the server (e.g. `export $(cat .env | xargs)` or via docker-compose `env_file`).
+- [ ] The backend reads **all** config exclusively via `Platform.environment` — no `.env` parsing library. Example:
+  ```dart
+  import 'dart:io' show Platform;
+
+  final host = Platform.environment['HOST'] ?? '0.0.0.0';
+  final port = int.parse(Platform.environment['PORT'] ?? '8080');
+  final cooldownSeconds = int.parse(Platform.environment['PIXEL_COOLDOWN_SECONDS'] ?? '5');
+  final maxConnections = int.parse(Platform.environment['MAX_CONNECTIONS'] ?? '50000');
+  ```
 
 ### 8.2 .gitignore
 - [ ] Create root `.gitignore` including:
-  - [ ] `packages/backend/.env`
+  - [ ] `.env`, `.env.*`, `*.env` — all environment files are gitignored globally, never commit secrets
   - [ ] `build/`
   - [ ] `.dart_tool/`
   - [ ] `*.g.dart` (generated Riverpod files)
@@ -679,6 +689,9 @@
   - [ ] `.flutter-plugins-dependencies`
   - [ ] `.firebase/`
   - [ ] `pubspec.lock` (packages only — keep frontend/backend lock files)
+
+> **Note:** Any file matching `.env`, `.env.*`, or `*.env` is ignored at the repo root level.
+> Use `.env.example` (committed, no real values) to document required variables.
 
 ### 8.3 Dockerfile (backend)
 - [ ] Create `Dockerfile` at root:
